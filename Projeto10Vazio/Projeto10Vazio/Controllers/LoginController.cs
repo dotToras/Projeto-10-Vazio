@@ -14,6 +14,18 @@ namespace Projeto10Vazio.Controllers
             return View();
         }
 
+        public ActionResult Login()
+        {
+
+            return View();
+        }
+
+        public ActionResult Cadastro()
+        {
+
+            return View();
+
+        }
         
     }
 }
