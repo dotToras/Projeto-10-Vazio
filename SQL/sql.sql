@@ -1,0 +1,14 @@
+create database BD;
+
+use BD;
+
+CREATE TABLE LOGIN (
+    Cod INT AUTO_INCREMENT PRIMARY KEY,
+    Usuario VARCHAR(255) NOT NULL,
+    Senha VARCHAR(255) NOT NULL
+);
+
+INSERT INTO LOGIN (USUARIO, SENHA) VALUES ('ADMIN', '1234567');
+
+select * from  login;
+
