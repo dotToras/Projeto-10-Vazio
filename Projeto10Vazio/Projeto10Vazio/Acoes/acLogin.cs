@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Microsoft.Ajax.Utilities;
+using MySql.Data.MySqlClient;
 using Projeto10Vazio.Dados;
 using Projeto10Vazio.Models;
 using System;
@@ -23,10 +24,43 @@ namespace Projeto10Vazio.Acoes
 
             cmd.ExecuteNonQuery();
 
-            cone.MyConnectBd();
+            cone.MyDesConnectBd();
 
 
 
         }
+
+        public int Verificar(modelLogin model)
+        {
+
+            MySqlCommand cmd = new MySqlCommand("select * from LOGIN where Usuario='@Usuario' and Senha='@Senha' ", cone.MyConnectBd());
+
+            cmd.Parameters.Add("@Usuario", MySqlDbType.VarChar).Value = model.Usuario;
+            cmd.Parameters.Add("@Senha", MySqlDbType.VarChar).Value = model.Senha;
+
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            cone.MyDesConnectBd();
+
+          
+
+          
+            if (model.Usuario == "admin" && model.Senha == "1234567")
+            {
+                return 1;
+            }
+
+            return 2;
+          
+        }
+
+
+
+    
+
+            
+          
+          
+
+        }
     }
-}

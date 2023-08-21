@@ -10,6 +10,7 @@ namespace Projeto10Vazio.Controllers
 {
     public class LoginController : Controller
     {
+        acLogin metodoLogin = new acLogin();
         // GET: Login
         public ActionResult Index()
         {
@@ -19,18 +20,24 @@ namespace Projeto10Vazio.Controllers
         public ActionResult Login()
         {
 
-
             return View();
-        }
 
+        }
+        [HttpPost]
         public ActionResult Login(modelLogin classeLogin)
         {
 
-            if(classeLogin.Usuario == classeLogin.Usuario)
+            if(metodoLogin.Verificar(classeLogin) ==1)
             {
-                RedirectToAction("Index", "Home");
+
+              return RedirectToAction("Index", "Home");
+
             }
-            return View();
+        
+
+
+
+                return View();
         }
 
         public ActionResult Cadastro()
@@ -42,7 +49,7 @@ namespace Projeto10Vazio.Controllers
         [HttpPost]
         public ActionResult Cadastro(modelLogin classeLogin)
         {
-            acLogin metodoLogin = new acLogin();
+        
 
             metodoLogin.Logar(classeLogin);
             return View();
