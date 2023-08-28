@@ -4,8 +4,10 @@ using Projeto10Vazio.Dados;
 using Projeto10Vazio.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace Projeto10Vazio.Acoes
 {
@@ -30,7 +32,7 @@ namespace Projeto10Vazio.Acoes
 
         }
 
-        public int Verificar(modelLogin model)
+        public modelLogin Verificar(modelLogin model)
         {
 
             MySqlCommand cmd = new MySqlCommand("select * from LOGIN where Usuario='@Usuario' and Senha='@Senha' ", cone.MyConnectBd());
@@ -38,29 +40,38 @@ namespace Projeto10Vazio.Acoes
             cmd.Parameters.Add("@Usuario", MySqlDbType.VarChar).Value = model.Usuario;
             cmd.Parameters.Add("@Senha", MySqlDbType.VarChar).Value = model.Senha;
 
-            MySqlDataReader reader = cmd.ExecuteReader();
+            MySqlDataReader leitor;
+
+            leitor = cmd.ExecuteReader();
+
 
             cone.MyDesConnectBd();
 
-          
 
-          
-            if (model.Usuario == "admin" && model.Senha == "1234567")
+            if (leitor.HasRows)
             {
-                return 1;
+                while (leitor.Read())
+                {
+
+                    modelLogin login = new modelLogin();
+                    {
+                        login.Usuario = Convert.ToString(leitor["usuario"]);
+                        login.Senha = Convert.ToString(leitor["senha"]);
+                    }
+
+                }
+
+
+
             }
-
-            return 2;
-          
-        }
-
-
-
-    
-
-            
-          
-          
+              
+            return model;
 
         }
+
+   
+
+
     }
+
+}

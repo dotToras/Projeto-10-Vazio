@@ -27,17 +27,29 @@ namespace Projeto10Vazio.Controllers
         public ActionResult Login(modelLogin classeLogin)
         {
 
-            if(metodoLogin.Verificar(classeLogin) ==1)
+            metodoLogin.Verificar(classeLogin);
+
+
+          
+            if (classeLogin.Usuario != null && classeLogin.Senha != null )
             {
+                
+                Session["usuario"] = classeLogin.Usuario.ToString();
+                Session["senha"] = classeLogin.Senha.ToString();
 
-              return RedirectToAction("Index", "Home");
-
+              
+                return RedirectToAction("Index", "Home");
             }
-        
+            else
+            {
+             
+                return RedirectToAction("Login", "Login");
+            }
 
 
 
-                return View();
+
+            return View();
         }
 
         public ActionResult Cadastro()
