@@ -11,9 +11,10 @@ namespace Projeto10Vazio.Models
 
         public int Cod { get; set; }
 
+        [Required]
         public string Usuario { get; set; }
 
-        
+        [Required]
         [DataType(DataType.Password)]
         public string Senha { get; set; }
 

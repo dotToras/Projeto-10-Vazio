@@ -16,7 +16,7 @@ namespace Projeto10Vazio.Acoes
         conexao cone = new conexao();
 
         //Metodo para Logar
-        public void Logar(modelLogin model)
+        public void Cadastrar(modelLogin model)
         {
 
             MySqlCommand cmd = new MySqlCommand("insert into LOGIN(Usuario, Senha) values(@Usuario, @Senha)", cone.MyConnectBd());
@@ -35,7 +35,7 @@ namespace Projeto10Vazio.Acoes
         public modelLogin Verificar(modelLogin model)
         {
 
-            MySqlCommand cmd = new MySqlCommand("select * from LOGIN where Usuario='@Usuario' and Senha='@Senha' ", cone.MyConnectBd());
+            MySqlCommand cmd = new MySqlCommand("select * from login where usuario = '@usuario' and senha = '@senha'", cone.MyConnectBd());
 
             cmd.Parameters.Add("@Usuario", MySqlDbType.VarChar).Value = model.Usuario;
             cmd.Parameters.Add("@Senha", MySqlDbType.VarChar).Value = model.Senha;
@@ -45,7 +45,7 @@ namespace Projeto10Vazio.Acoes
             leitor = cmd.ExecuteReader();
 
 
-            cone.MyDesConnectBd();
+            
 
 
             if (leitor.HasRows)
@@ -55,14 +55,19 @@ namespace Projeto10Vazio.Acoes
 
                     modelLogin login = new modelLogin();
                     {
-                        login.Usuario = Convert.ToString(leitor["usuario"]);
-                        login.Senha = Convert.ToString(leitor["senha"]);
+                        login.Usuario = Convert.ToString(leitor["Usuario"]);
+                        login.Senha = Convert.ToString(leitor["Senha"]);
                     }
 
                 }
 
 
 
+            }
+            else
+            {
+                model.Usuario = null; 
+                model.Senha = null;
             }
               
             return model;

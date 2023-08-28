@@ -24,18 +24,18 @@ namespace Projeto10Vazio.Controllers
 
         }
         [HttpPost]
-        public ActionResult Login(modelLogin classeLogin)
+        public ActionResult Login(modelLogin model)
         {
 
-            metodoLogin.Verificar(classeLogin);
+            metodoLogin.Verificar(model);
 
 
           
-            if (classeLogin.Usuario != null && classeLogin.Senha != null )
+            if (model.Usuario != null && model.Senha != null )
             {
                 
-                Session["usuario"] = classeLogin.Usuario.ToString();
-                Session["senha"] = classeLogin.Senha.ToString();
+                Session["Usuario"] = model.Usuario.ToString();
+                Session["Senha"] = model.Senha.ToString();
 
               
                 return RedirectToAction("Index", "Home");
@@ -63,7 +63,7 @@ namespace Projeto10Vazio.Controllers
         {
         
 
-            metodoLogin.Logar(classeLogin);
+            metodoLogin.Cadastrar(classeLogin);
             return View();
         }
         
